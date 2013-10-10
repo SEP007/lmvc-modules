@@ -28,7 +28,8 @@ class FileLocator
         $_unFoundAssets = [];
 
     private static
-        $_stage;
+        $_stage,
+        $_aggressiveCaching;
 
     /**
      * Constructs FileLocator acting according to parameters.
@@ -166,6 +167,16 @@ class FileLocator
     }
 
     /**
+     * Sets up 304 caching to be used if demanded.
+     *
+     * @param boolean $flag indicating caching wish.
+     */
+    public static function set304Caching($flag)
+    {
+        static::$_aggressiveCaching = $flag;
+    }
+
+    /**
      * @param boolean $flag indicating if sub directories should be used
      */
     public function useFolders($flag) {
@@ -197,11 +208,16 @@ class FileLocator
 
             #if it is return true
             if (file_exists($assetFilePath)) {
-                $this->_requestedFiles[] = new \SplFileObject($assetFilePath, "r");
+                $fileObject = new \SplFileObject($assetFilePath, "r");
+                $this->_requestedFiles[] = $fileObject;
 
+                if (static::$_aggressiveCaching === true) { $this->_setHttpCacheHeaders($fileObject); }
             #still it may be found only in fallback dirs
             } else if ($assetFilePath = $this->_recursiveSearch($asset)) {
-                $this->_requestedFiles[] = new \SplFileObject($assetFilePath, "r");
+                $fileObject = new \SplFileObject($assetFilePath, "r");
+                $this->_requestedFiles[] = $fileObject;
+
+                if (static::$_aggressiveCaching === true) { $this->_setHttpCacheHeaders($fileObject); }
             #or non-existent
             } else {
                 http_response_code(404);
@@ -339,5 +355,36 @@ class FileLocator
         }
 
         $this->_setCachedFilePath();
+    }
+
+    /**
+     * Sets http headers for proper caching with 304-code according to the file's change data.
+     *
+     * @param ojbect $fileObject    the fileObject who's change date should be compared against the
+     *                              browser's cache-timestsamp
+     *
+     * @return bool indicating if file is cached in browser
+     */
+    private function _setHttpCacheHeaders($fileObject)
+    {
+        # Collect some information about file requested and file in browser's cache
+        $fileModifiedTimestamp      = $fileObject->getMTime();
+        $fileName                   = $fileObject->getFileName();
+        $browserModifiedTimestamp   = isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ?
+                                        strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) : null;
+
+        # Makes the browser respond with HTTP_IF_MODIFIED_SINCE and If-None-Match for E-Tag validation
+        header('Last-Modified: ' . gmdate("D, d M Y H:i:s", $fileModifiedTimestamp ) . " GMT");
+        header('ETag: "'.md5($fileModifiedTimestamp.$fileName).'"');
+        header('Cache-Control: public');
+
+        # Now check if file content needs to be send
+        if($browserModifiedTimestamp !== null && $fileModifiedTimestamp <= $browserModifiedTimestamp) {
+            http_response_code(304);
+
+            return true;
+        }
+
+        return false;
     }
 }
