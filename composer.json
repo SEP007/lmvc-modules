@@ -17,15 +17,25 @@
     "require": {
         "php": ">=5.4",
         "scandio/lmvc":"dev-master",
+        "scandio/troba": "dev-master",
         "leafo/lessphp": "dev-master",
         "mustache/mustache": "dev-master",
         "leafo/scssphp": "dev-master",
         "nitra/php-min": "dev-master",
         "intervention/image": "dev-master",
         "coffeescript/coffeescript": "dev-master",
-        "scandio/troba": "dev-master",
         "atelierspierrot/markdown-extended": "dev-master"
     },
+    "repositories": [
+       {
+         "type": "git",
+         "url": "https://github.com/SEP007/lmvc-modules.git"
+       },
+       {
+         "type": "git",
+         "url": "https://github.com/SEP007/lmvc-troba.git"
+       }
+    ],
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
         "satooshi/php-coveralls": "dev-master"
