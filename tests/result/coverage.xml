@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1382032999">
-  <project timestamp="1382032999">
+<coverage generated="1382033215">
+  <project timestamp="1382033215">
     <package name="Composer\Autoload">
       <file name="/Volumes/HDD/Development/sep007/lmvc-modules/vendor/composer/ClassLoader.php">
         <class name="ClassLoader" namespace="Composer\Autoload">
