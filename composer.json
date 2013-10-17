@@ -27,7 +27,7 @@
         "atelierspierrot/markdown-extended": "dev-master"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev"
+        "phpunit/phpunit": "3.7.*"
     },
     "config": {
         "bin-dir": "bin"
