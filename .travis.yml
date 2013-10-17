@@ -5,3 +5,5 @@ php:
 before_script:
  - composer install
 script: sh scripts/test.sh
+after_script:
+  - php bin/coveralls

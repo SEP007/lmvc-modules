@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1382033215">
-  <project timestamp="1382033215">
+<coverage generated="1382035475">
+  <project timestamp="1382035475">
     <package name="Composer\Autoload">
       <file name="/Volumes/HDD/Development/sep007/lmvc-modules/vendor/composer/ClassLoader.php">
         <class name="ClassLoader" namespace="Composer\Autoload">
@@ -98,7 +98,7 @@
       </file>
     </package>
     <file name="/Volumes/HDD/Development/sep007/lmvc-modules/vendor/composer/autoload_real.php">
-      <class name="ComposerAutoloaderInit139a04a5d689cf4b2023a5640c32bf05" namespace="global">
+      <class name="ComposerAutoloaderInit21736e44c4d65f6668651d2675e34980" namespace="global">
         <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="27" coveredelements="0"/>
       </class>
       <line num="9" type="method" name="loadClassLoader" crap="6" count="0"/>
