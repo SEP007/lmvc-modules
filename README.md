@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/sep007/lmvc-modules.png)](https://travis-ci.org/[sep007]/[lmvc-modules])
+[![Build Status](https://travis-ci.org/SEP007/lmvc-modules.png)](https://travis-ci.org/SEP007/lmvc-modules)
 [![Coverage Status](https://coveralls.io/repos/SEP007/lmvc-modules/badge.png)](https://coveralls.io/r/SEP007/lmvc-modules)
 [![Dependency Status](https://www.versioneye.com/user/projects/52602e95632bac7cb6000036/badge.png)](https://www.versioneye.com/user/projects/52602e95632bac7cb6000036)
 
