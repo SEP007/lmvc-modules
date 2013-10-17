@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/[sep007]/[lmvc-modules].png)](https://travis-ci.org/[sep007]/[lmvc-modules])
+
 # lmvc-modules
 
 LMVC-Modules are easy-to-use extensions to the 'scandio/lmvc'-framework
