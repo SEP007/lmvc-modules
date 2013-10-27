@@ -24,17 +24,17 @@ class AssetPipelineHelper
      */
     private function _implode_recursive($glue, array $arr)
     {
-       $flattened = [];
+        $flattened = [];
 
-       foreach($arr as $piece) {
-          if ( is_array( $piece ) ) {
-             $flattened[] = $this->_implode_recursive( $glue, $piece );
-          } else {
-             $flattened[] = $piece;
-          }
-       }
+        foreach($arr as $piece) {
+            if ( is_array( $piece ) ) {
+                $flattened[] = $this->_implode_recursive( $glue, $piece );
+            } else {
+                $flattened[] = $piece;
+            }
+        }
 
-       return implode( $glue, $flattened );
+        return implode( $glue, $flattened );
     }
 
     /**
