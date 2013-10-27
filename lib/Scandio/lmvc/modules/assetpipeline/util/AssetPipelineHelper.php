@@ -24,11 +24,11 @@ class AssetPipelineHelper
      */
     private function _implode_recursive($glue, array $arr)
     {
-       $flattened = '';
+       $flattened = [];
 
        foreach($arr as $piece) {
           if ( is_array( $piece ) ) {
-             $flattened[] = r_implode( $glue, $piece );
+             $flattened[] = $this->_implode_recursive( $glue, $piece );
           } else {
              $flattened[] = $piece;
           }
@@ -104,7 +104,7 @@ class AssetPipelineHelper
         $realpath  = realpath($path);
 
         if (!$realpath === false) { return $realpath; }
-        else { trigger_error('Path '. $path  . ' has been invalided using realpath.', E_USER_WARNING); }
+        else { return false; }
     }
 
     /**
