@@ -27,7 +27,7 @@ class AssetPipelineHelper
         $imploded = '';
 
         foreach($arr as $piece) {
-            if(is_array($piece)) { $imploded .= $glue . $this->_implode_recursive($glue, $piece); }
+            if (is_array($piece)) { $imploded .= $glue . $this->_implode_recursive($glue, $piece); }
             else { $imploded .= $glue . $piece; }
         }
 
@@ -78,7 +78,11 @@ class AssetPipelineHelper
      */
     public function path($directories)
     {
-        return $this->_implode_recursive(DIRECTORY_SEPARATOR, $directories);
+        $path      = $this->_implode_recursive(DIRECTORY_SEPARATOR, $directories);
+        $realpath  = realpath($path);
+
+        if (!$realpath === false) { return $realpath; }
+        else { trigger_error('Path '. $path  . ' has been invalided using realpath.', E_USER_WARNING); }
     }
 
     /**
