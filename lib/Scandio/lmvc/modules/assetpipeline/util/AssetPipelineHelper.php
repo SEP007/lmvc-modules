@@ -25,6 +25,7 @@ class AssetPipelineHelper
     private function _implode_recursive($glue, array $arr)
     {
         $imploded = '';
+        $count    = 1;
 
         foreach($arr as $piece) {
             if (is_array($piece)) { $imploded .= $glue . $this->_implode_recursive($glue, $piece); }
@@ -32,6 +33,24 @@ class AssetPipelineHelper
         }
 
         return $imploded;
+    }
+
+    /**
+     * Replaces only the first occurance with another string within a subject.
+     *
+     * @param $removeable string from $subject
+     * @param $replacement for $removeable
+     * @param $subject where the search will be performed in
+     *
+     * @return mixed|null
+     */
+    private function removeFirstOccurance($removeable, $replacement, $subject)
+    {
+        $removed = null;
+
+        $removed = preg_replace('/'.$removeable.'/', $replacement, $subject, 1);
+
+        return $removed;
     }
 
     /**
