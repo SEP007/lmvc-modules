@@ -24,15 +24,17 @@ class AssetPipelineHelper
      */
     private function _implode_recursive($glue, array $arr)
     {
-        $imploded = '';
-        $count    = 1;
+       $flattened = '';
 
-        foreach($arr as $piece) {
-            if (is_array($piece)) { $imploded .= $glue . $this->_implode_recursive($glue, $piece); }
-            else { $imploded .= $glue . $piece; }
-        }
+       foreach($arr as $piece) {
+          if ( is_array( $piece ) ) {
+             $flattened[] = r_implode( $glue, $piece );
+          } else {
+             $flattened[] = $piece;
+          }
+       }
 
-        return $imploded;
+       return implode( $glue, $flattened );
     }
 
     /**
@@ -46,9 +48,10 @@ class AssetPipelineHelper
      */
     private function removeFirstOccurance($removeable, $replacement, $subject)
     {
-        $removed = null;
+        $removed     = null;
+        $removeable  = addslashes($removeable);
 
-        $removed = preg_replace('/'.$removeable.'/', $replacement, $subject, 1);
+        $removed = preg_replace('/'.$removeable.'/', $replacement, addslashes($subject), 1);
 
         return $removed;
     }
