@@ -12,6 +12,6 @@ class Bootstrap extends \Scandio\lmvc\Bootstrap
     public function initialize()
     {
         LVC::registerControllerNamespace(new controllers\Registration());
-        LVC::registerViewDirectory(static::getPath() . '/views/');
+        LVC::registerViewDirectory(static::getPath() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
     }
 }

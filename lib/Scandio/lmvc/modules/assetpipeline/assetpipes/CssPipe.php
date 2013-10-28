@@ -33,7 +33,7 @@ class CssPipe extends AbstractAssetPipe
     /**
      * The abstract process method to be called whenever file needs to be handled by this pipe.
      *
-     * @param $asset which should be processed by this pipe
+     * @param $asset which should be processed by this pipe (its filepath)
      * @param array $options to be applied on asset (e.g. min)
      * @param string describing errors during file location process
      *
@@ -42,12 +42,11 @@ class CssPipe extends AbstractAssetPipe
     public function process($asset, $options = [], $errors = '')
     {
         $css = null;
-        $file = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
 
         if (in_array('min', $options) && !$this->_hasDefaultMimeType($asset)) {
-            $css = $this->_min($file);
+            $css = $this->_min($asset);
         } else {
-            $css = file_get_contents($file);
+            $css = file_get_contents($asset);
         }
 
         if (!$this->_hasDefaultMimeType($asset)) {

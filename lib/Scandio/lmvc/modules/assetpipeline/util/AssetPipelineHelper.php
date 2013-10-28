@@ -24,14 +24,36 @@ class AssetPipelineHelper
      */
     private function _implode_recursive($glue, array $arr)
     {
-        $imploded = '';
+        $flattened = [];
 
         foreach($arr as $piece) {
-            if(is_array($piece)) { $imploded .= $glue . $this->_implode_recursive($glue, $piece); }
-            else { $imploded .= $glue . $piece; }
+            if ( is_array( $piece ) ) {
+                $flattened[] = $this->_implode_recursive( $glue, $piece );
+            } else {
+                $flattened[] = $piece;
+            }
         }
 
-        return $imploded;
+        return implode( $glue, $flattened );
+    }
+
+    /**
+     * Replaces only the first occurance with another string within a subject.
+     *
+     * @param $removeable string from $subject
+     * @param $replacement for $removeable
+     * @param $subject where the search will be performed in
+     *
+     * @return mixed|null
+     */
+    private function removeFirstOccurance($removeable, $replacement, $subject)
+    {
+        $removed     = null;
+        $removeable  = addslashes($removeable);
+
+        $removed = preg_replace('/'.$removeable.'/', $replacement, addslashes($subject), 1);
+
+        return $removed;
     }
 
     /**
@@ -78,7 +100,11 @@ class AssetPipelineHelper
      */
     public function path($directories)
     {
-        return $this->_implode_recursive(DIRECTORY_SEPARATOR, $directories);
+        $path      = $this->_implode_recursive(DIRECTORY_SEPARATOR, $directories);
+        $realpath  = realpath($path);
+
+        if (!$realpath === false) { return $realpath; }
+        else { return $path;  }
     }
 
     /**

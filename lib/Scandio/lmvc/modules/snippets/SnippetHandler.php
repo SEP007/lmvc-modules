@@ -83,7 +83,7 @@ abstract class SnippetHandler
             return false;
         }
         foreach (self::$snippetPath[$class] as $path) {
-            $snippetPath = ((substr($path, 0, 1) == '/')? '':LVC::get()->config->appPath) . $path . DIRECTORY_SEPARATOR . $snippet;
+            $snippetPath = $path . DIRECTORY_SEPARATOR . $snippet;
             if (file_exists($snippetPath)) {
                 return $snippetPath;
             }

@@ -27,7 +27,7 @@ class JsPipe extends AbstractAssetPipe
     /**
      * The abstract process method to be called whenever file needs to be handled by this pipe.
      *
-     * @param $asset which should be processed by this pipe
+     * @param $asset which should be processed by this pipe (its filepath)
      * @param array $options to be applied on asset (e.g. min)
      * @param string describing errors during file location process
      *
@@ -35,14 +35,13 @@ class JsPipe extends AbstractAssetPipe
      */
     public function process($asset, $options = [], $errors = '')
     {
-        $js     = null;
-        $file   = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
+        $js = null;
 
         #needs no explanation?
         if (in_array('min', $options) && !$this->_hasDefaultMimeType($asset)) {
-            $js = $this->_min($file);
+            $js = $this->_min($asset);
         } else {
-            $js = file_get_contents($file);
+            $js = file_get_contents($asset);
         }
 
         if (!$this->_hasDefaultMimeType($asset)) {
