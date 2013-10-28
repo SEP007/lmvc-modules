@@ -41,8 +41,8 @@ class CssPipe extends AbstractAssetPipe
      */
     public function process($asset, $options = [], $errors = '')
     {
-        $css = null;
-        $file = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
+        $css    = null;
+        $file   =  $asset;
 
         if (in_array('min', $options) && !$this->_hasDefaultMimeType($asset)) {
             $css = $this->_min($file);

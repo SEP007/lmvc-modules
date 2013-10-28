@@ -43,8 +43,8 @@ class CoffeescriptPipe extends AbstractAssetPipe
      */
     public function process($asset, $options = [], $errors = '')
     {
-        $file = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
-        $js = null;
+        $file   = $asset;
+        $js     = null;
 
         if (!$this->_hasDefaultMimeType($asset)) {
             try

@@ -46,7 +46,7 @@ class SassPipe extends AbstractAssetPipe
     public function process($asset, $options = [], $errors = '')
     {
         $css = null;
-        $file = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
+        $file   = $asset;
 
         if (!$this->_hasDefaultMimeType($asset)) {
             $css = $this->_compile($file);

@@ -31,7 +31,7 @@ class FontPipe extends AbstractAssetPipe
     public function process($asset, $options = [], $errors = '')
     {
         $css = null;
-        $file = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
+        $file   = $asset;
 
         $font = file_get_contents($file);
 
