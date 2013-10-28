@@ -36,7 +36,7 @@ class JsPipe extends AbstractAssetPipe
     public function process($asset, $options = [], $errors = '')
     {
         $js     = null;
-        $file   = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
+        $file   = $asset;
 
         #needs no explanation?
         if (in_array('min', $options) && !$this->_hasDefaultMimeType($asset)) {
