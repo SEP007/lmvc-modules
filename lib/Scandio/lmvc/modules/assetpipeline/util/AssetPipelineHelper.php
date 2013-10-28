@@ -104,7 +104,7 @@ class AssetPipelineHelper
         $realpath  = realpath($path);
 
         if (!$realpath === false) { return $realpath; }
-        else { return false;  }
+        else { return $path;  }
     }
 
     /**
