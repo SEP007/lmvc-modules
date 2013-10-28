@@ -104,7 +104,7 @@ class AssetPipelineHelper
         $realpath  = realpath($path);
 
         if (!$realpath === false) { return $realpath; }
-        else { trigger_error('Path: ' . $path . ' got invalided in Asset Pipeline.', E_USER_WARNING);  }
+        else { return false;  }
     }
 
     /**
