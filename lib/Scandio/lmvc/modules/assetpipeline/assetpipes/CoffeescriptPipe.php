@@ -35,7 +35,7 @@ class CoffeescriptPipe extends AbstractAssetPipe
     /**
      * The abstract process method to be called whenever file needs to be handled by this pipe.
      *
-     * @param $asset which should be processed by this pipe
+     * @param $asset which should be processed by this pipe (its filepath)
      * @param array $options to be applied on asset (e.g. min)
      * @param string describing errors during file location process
      *
@@ -43,30 +43,26 @@ class CoffeescriptPipe extends AbstractAssetPipe
      */
     public function process($asset, $options = [], $errors = '')
     {
-        $file = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
         $js = null;
 
         if (!$this->_hasDefaultMimeType($asset)) {
-            try
-            {
-                $coffee = file_get_contents($file);
+            try {
+                $coffee = file_get_contents($asset);
 
                 // See available options above.
-                $js = CoffeeScript\Compiler::compile($coffee, array('filename' => $file));
+                $js = CoffeeScript\Compiler::compile($coffee, array('filename' => $asset));
 
                 if(in_array('min', $options)) {
                     $js = $this->_min($js);
                 }
 
                 $js = $this->comment($errors, $js);
-            }
-            catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 echo $e->getMessage();
                 $js = $e->getMessage();
             }
         } else {
-            $js = file_get_contents($file);
+            $js = file_get_contents($asset);
         }
 
         return $js;

@@ -46,10 +46,9 @@ class LessPipe extends AbstractAssetPipe
     public function process($asset, $options = [], $errors = '')
     {
         $css = null;
-        $file = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
 
         if (!$this->_hasDefaultMimeType($asset)) {
-            $css = $this->_compile($file);
+            $css = $this->_compile($asset);
 
             if (in_array('min', $options)) {
                 $css = $this->_min($css);
@@ -57,7 +56,7 @@ class LessPipe extends AbstractAssetPipe
 
             $css = $this->comment($errors, $css);
         } else {
-            $css = file_get_contents($file);
+            $css = file_get_contents($asset);
         }
 
         return $css;

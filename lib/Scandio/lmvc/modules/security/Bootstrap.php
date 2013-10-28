@@ -13,7 +13,7 @@ class Bootstrap extends \Scandio\lmvc\Bootstrap
     public function initialize()
     {
         LVC::registerControllerNamespace(new controllers\Security());
-        LVC::registerViewDirectory(static::getPath() . '/views/');
-        Snippets::registerSnippetDirectory(self::getPath() . '/snippets/');
+        LVC::registerViewDirectory(static::getPath() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+        Snippets::registerSnippetDirectory(self::getPath() . DIRECTORY_SEPARATOR . 'snippets');
     }
 }
