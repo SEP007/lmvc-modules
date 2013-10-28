@@ -37,7 +37,7 @@ class SassPipe extends AbstractAssetPipe
     /**
      * The abstract process method to be called whenever file needs to be handled by this pipe.
      *
-     * @param $asset which should be processed by this pipe
+     * @param $asset which should be processed by this pipe (its filepath)
      * @param array $options to be applied on asset (e.g. min)
      * @param string describing errors during file location process
      *
@@ -46,10 +46,9 @@ class SassPipe extends AbstractAssetPipe
     public function process($asset, $options = [], $errors = '')
     {
         $css = null;
-        $file   = $asset;
 
         if (!$this->_hasDefaultMimeType($asset)) {
-            $css = $this->_compile($file);
+            $css = $this->_compile($asset);
 
             if (in_array('min', $options)) {
                 $css = $this->_min($css);
@@ -57,7 +56,7 @@ class SassPipe extends AbstractAssetPipe
 
             $css = $this->comment($errors, $css);
         } else {
-            $css = file_get_contents($file);
+            $css = file_get_contents($asset);
         }
 
         return $css;

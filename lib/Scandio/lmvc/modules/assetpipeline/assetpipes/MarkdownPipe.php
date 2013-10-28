@@ -22,7 +22,7 @@ class MarkdownPipe extends AbstractAssetPipe
     /**
      * The abstract process method to be called whenever file needs to be handled by this pipe.
      *
-     * @param $asset which should be processed by this pipe
+     * @param $asset which should be processed by this pipe (its filepath)
      * @param array $options to be applied on asset
      * @param string describing errors during file location process
      *
@@ -31,11 +31,10 @@ class MarkdownPipe extends AbstractAssetPipe
     public function process($asset, $options = [], $errors = '')
     {
         $html = null;
-        $file   = $asset;
 
         $html = \MarkdownExtended\MarkdownExtended::create()
            ->get('Parser', array())
-           ->parse( new \MarkdownExtended\Content(null, $file) )
+           ->parse( new \MarkdownExtended\Content(null, $asset) )
            ->getContent();
 
         return $html->getBody();
