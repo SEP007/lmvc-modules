@@ -3,7 +3,6 @@
 namespace Scandio\lmvc\modules\assetpipeline\util;
 
 use Scandio\lmvc\modules\assetpipeline\util;
-use Scandio\lmvc\LVCConfig;
 use Scandio\lmvc\LVC;
 
 /**
