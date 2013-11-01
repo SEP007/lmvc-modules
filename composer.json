@@ -17,7 +17,7 @@
     "require": {
         "php": ">=5.4",
         "scandio/lmvc":"dev-master",
-        "scandio/lmvc-utils": "dev-master",
+        "scandio/lmvc-utils": "dev-feature/psr3-logger",
         "scandio/troba": "dev-master",
         "leafo/lessphp": "dev-master",
         "mustache/mustache": "dev-master",
