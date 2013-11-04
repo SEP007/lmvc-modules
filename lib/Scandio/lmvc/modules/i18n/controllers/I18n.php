@@ -14,14 +14,21 @@
 		
 		private static $selectedLanguages = array();
 		
-		static function init() {
-			// Session::set('language', self::$language, false);
+		private static $rootDirectory;
+		
+		static function initialize() {
 			self::loadIfNeeded();
 		}
 
 		public static function setLanguage($language) {
 			Session::set('language', $language, false); 
 			self::loadIfNeeded();
+			
+			//redirect to page based on the Session
+			//we have to handle the case where we redirect to another page
+			//after an action
+			$redirectPage = Session::get('redirectPage');
+			self::redirectTo($redirectPage);
 		}
 		
 		public static function translate($key) {
@@ -33,7 +40,6 @@
 			}
 		}
 		
-		// have to check based on the Session
 		private static function loadIfNeeded() {
 			$lang = Session::get('language');
 			
@@ -42,33 +48,42 @@
 				Session::set('language', $lang, false);
 			}
 			
-// 			attempt for caching
-			if (in_array($lang, self::$selectedLanguages)) {
-				// echo 'File' . $lang . ' not loaded';
-				return;
-			}
-			
-			array_push(self::$selectedLanguages, $lang);
-			// 			attempt for caching
-			// foreach(self::$selectedLanguages as $lan) {
-				// echo $lan;
-			// } 
-			
-			$filePath = 'app/locales/' . $lang . '.yaml';
+			$filePath = self::$rootDirectory . '/locales/' . $lang . '.yaml';
 			self::loadFile($filePath);
 		}
 		
 		private static function loadFile($filePath) {
 			if(!file_exists($filePath)) {
-				$filePath = 'app/locales/' . self::$language . '.yaml';
+				$filePath = self::$rootDirectory . '/locales/'. self::$language . '.yaml';
 				//We must write that to the logger
 				 //echo 'missing file ' . $filePath; 
 			}
 			self::$translations = spyc_load_file($filePath);
 		}
 		
+		public static function configure($assetRootDirectory) {
+			
+			static::$rootDirectory = $assetRootDirectory;
+			
+			static::initialize();
+		}
+		
+		public static function index() {
+        	return static::redirect('I18n::languages');
+    	}
+
+		private static function redirectTo($page) {
+			switch ($page) {
+				case 'main.html':
+					static::redirect('Register::main');
+					break;
+				
+				default:
+					static::redirect('Register::main');
+					break;
+			}
+			
+		}
 	}
-	//forcing the files to load
-	I18n::init();
 	
 ?>
