@@ -4,6 +4,7 @@ namespace Scandio\lmvc\modules\snippets;
 
 use Scandio\lmvc\LVC;
 use Scandio\lmvc\modules\security\Security;
+use Scandio\lmvc\utils\string\StringUtils;
 
 abstract class SnippetHandler
 {
@@ -26,7 +27,7 @@ abstract class SnippetHandler
         if (method_exists(get_called_class(), $name)) {
             $result = call_user_func_array('static::' . $name, $params);
         } else {
-            self::$snippetFile = self::searchSnippet(static::$prefix . LVC::camelCaseTo($name) . '.html');
+            self::$snippetFile = self::searchSnippet(static::$prefix . StringUtils::camelCaseTo($name) . '.html');
             if (self::$snippetFile) {
                 $app = LVC::get(); // should be available in the snippet's scope as in views for convenience
                 include(self::$snippetFile);

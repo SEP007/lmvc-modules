@@ -5,7 +5,7 @@ namespace Scandio\lmvc\modules\upload;
 use Scandio\lmvc\LVC;
 use Scandio\lmvc\modules\upload\controllers;
 
-class Bootstrap extends \Scandio\lmvc\Bootstrap
+class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
 {
 
     public static function configure($config = [])

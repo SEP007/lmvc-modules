@@ -5,7 +5,7 @@ namespace Scandio\lmvc\modules\security;
 use Scandio\lmvc\LVC;
 use Scandio\lmvc\modules\snippets\Snippets;
 
-class Bootstrap extends \Scandio\lmvc\Bootstrap
+class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
 {
     /**
      * Registers the module controller namespace and the views directory
