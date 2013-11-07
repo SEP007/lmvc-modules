@@ -99,9 +99,10 @@ class DatabasePrincipal extends handlers\AbstractSessionPrincipal
     public function isUserInGroup($username, $inGroup)
     {
         $groups = models\Groups::getByUsername($username);
+        $groupModel = models\Groups::findBy("group_name", $inGroup)->one();
 
         foreach ($groups as $group) {
-            if ($group->id == $inGroup->id)
+            if ($group->id == $groupModel->id)
                 return true;
         }
 
