@@ -1,9 +1,9 @@
 <?php
 	namespace Scandio\lmvc\modules\i18n\controllers;
 	
-	use spyc\Spyc;
 	use Scandio\lmvc\Controller;
 	use Scandio\lmvc\modules\session\Session;
+    use Scandio\lmvc\modules\i18n\handler\YamlHandler;
 	
 	class I18n extends Controller {
 		
@@ -15,20 +15,14 @@
 		private static $selectedLanguages = array();
 		
 		private static $rootDirectory;
-		
+        
 		static function initialize() {
-			self::loadIfNeeded();
+			self::loadFileAndRedirect();
 		}
 
 		public static function setLanguage($language) {
 			Session::set('language', $language, false); 
-			self::loadIfNeeded();
-			
-			//redirect to page based on the Session
-			//we have to handle the case where we redirect to another page
-			//after an action
-			$redirectPage = Session::get('redirectPage');
-			self::redirectTo($redirectPage);
+			self::loadFileAndRedirect();
 		}
 		
 		public static function translate($key) {
@@ -58,11 +52,14 @@
 				//We must write that to the logger
 				 //echo 'missing file ' . $filePath; 
 			}
-			self::$translations = spyc_load_file($filePath);
+            //should be with YamlHandler
+			self::$translations = YamlHandler::loadFile($filePath);
 		}
 		
 		public static function configure($assetRootDirectory) {
 			
+            static::preProcess();
+            
 			static::$rootDirectory = $assetRootDirectory;
 			
 			static::initialize();
@@ -70,20 +67,73 @@
 		
 		public static function index() {
         	return static::redirect('I18n::languages');
+        	// self::renderHtml(include('../views/languages.html'));
     	}
+        
+        /**
+          * @return bool
+        */
+        public static function preProcess() {
+            if (!parent::preProcess()) {
+                return false;
+            }
+            
+            Session::set('originPage', $_SERVER['REQUEST_URI']);
+        }
+        
+        private static function loadFileAndRedirect() {
+            self::loadIfNeeded();
+            $page = Session::get('originPage');
+            $redirect = self::whereToRedirect($page);
+            static::redirect($redirect);
+        }
+        
+        private static function whereToRedirect($page) {
+            $reditectTo;
+            switch($page) {
+                case '':
+                    $reditectTo = self::$originalPage;
+                break;
+                    
+                case '/lmvc-patat/registration/signup':
+                    $reditectTo = 'Registration::signup';
+                break;
+                
+                case '/lmvc-patat/registration/edit':
+                    $reditectTo = 'Registration::edit';
+                break;
+                
+                case '/lmvc-patat/registration/failure':
+                    $reditectTo = 'Registration::failure';
+                break;
+                
+                case '/lmvc-patat/registration/success':
+                    $reditectTo = 'Registration::success';
+                break;
+                
+                case '/lmvc-patat/menu/edit':
+                    $reditectTo = 'Menu::edit';
+                break;
+                
+                case '/lmvc-patat/menu/index':
+                    $reditectTo = 'Menu::index';
+                break;
+                
+                case '/lmvc-patat/dishes/index':
+                    $reditectTo = 'Dishes::index';
+                break;
+                
+                case '/lmvc-patat/dishes/map':
+                    $reditectTo = 'Dishes::map';
+                break;
+                
+                default: 
+                    $redirectTo = 'Application::index';
 
-		private static function redirectTo($page) {
-			switch ($page) {
-				case 'main.html':
-					static::redirect('Register::main');
-					break;
-				
-				default:
-					static::redirect('Register::main');
-					break;
-			}
+                return $redirectTo;
+            }
+        }
 			
-		}
 	}
 	
 ?>
