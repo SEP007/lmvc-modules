@@ -18,7 +18,7 @@ class MustacheHandler extends AbstractHandler
     {
         return $this->_mustacheEngine->render(
             $this->getFile($template),
-            $data
+            $this->getRenderArgs()
         );
     }
 }
