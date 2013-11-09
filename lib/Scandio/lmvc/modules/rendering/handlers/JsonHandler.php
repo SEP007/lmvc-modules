@@ -2,7 +2,7 @@
 
 namespace Scandio\lmvc\modules\rendering\handlers;
 
-class Json extends AbstractHandler
+class JsonHandler extends AbstractHandler
 {
     public function render($renderArgs = [], $template = null)
     {
