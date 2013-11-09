@@ -12,16 +12,16 @@ on any controller's `render($args)` call. Other render modules are accessable th
 "rendering": {
    "default": {
       "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\Plain",
-      "extension: "php"
+      "extension": "php"
    },
    "additionals": [{
       "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\Smarty",
       "handle": "smarty",
-      "extension: "smarty"
+      "extension": "smarty"
    }, {
       "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\Json",
       "handle": "json",
-      "extension: null
+      "extension": null
    }]
 }
 ```
