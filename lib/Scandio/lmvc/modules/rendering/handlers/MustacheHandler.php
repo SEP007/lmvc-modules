@@ -14,8 +14,10 @@ class MustacheHandler extends AbstractHandler
         $this->_mustacheEngine = new \Mustache_Engine();
     }
 
-    public function render($template)
+    public function render($renderArgs = [], $template)
     {
+        $this->setRenderArgs($renderArgs, true);
+
         return $this->_mustacheEngine->render(
             $this->getFile($template),
             $this->getRenderArgs()
