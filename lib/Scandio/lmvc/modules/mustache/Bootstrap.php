@@ -4,7 +4,7 @@ namespace Scandio\lmvc\modules\mustache;
 
 use Scandio\lmvc\LVC;
 
-class Bootstrap extends \Scandio\lmvc\Bootstrap
+class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
 {
     /**
      * Initialize the module

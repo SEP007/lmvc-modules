@@ -40,6 +40,6 @@ class Mustache
      */
     private static function getTemplate($template)
     {
-        return file_get_contents('./templates/' . $template . '.mustache');
+        return file_get_contents('.' . DIRECTORY_SEPARATOR .'templates' . DIRECTORY_SEPARATOR . $template . '.mustache');
     }
 }

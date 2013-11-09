@@ -3,6 +3,7 @@
 namespace Scandio\lmvc\modules\form;
 
 use Scandio\lmvc\LVC;
+use Scandio\lmvc\utils\string\StringUtils;
 
 /**
  * Form Validator class
@@ -78,7 +79,7 @@ abstract class AbstractForm
     {
         $newValidator = $validator;
         $rule = array();
-        while (!method_exists($this, LVC::camelCaseFrom($newValidator))) {
+        while (!method_exists($this, StringUtils::camelCaseFrom($newValidator))) {
             $dashPos = strrpos($newValidator, '-');
             if ($dashPos > 0) {
                 $rule[] = substr($newValidator, $dashPos + 1);
@@ -89,7 +90,7 @@ abstract class AbstractForm
             }
         }
         return array(
-            'method' => LVC::camelCaseFrom($newValidator),
+            'method' => StringUtils::camelCaseFrom($newValidator),
             'rule' => implode('-', array_reverse($rule))
         );
     }

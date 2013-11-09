@@ -2,8 +2,7 @@
 
 namespace Scandio\lmvc\modules\assetpipeline\controllers;
 
-use Scandio\lmvc\LVC;
-use Scandio\lmvc\LVCConfig;
+use Scandio\lmvc\utils\config\Config;
 use Scandio\lmvc\Controller;
 use Scandio\lmvc\modules\assetpipeline\interfaces;
 use Scandio\lmvc\modules\assetpipeline\assetpipes;
@@ -32,9 +31,6 @@ class AssetPipeline extends Controller implements interfaces\AssetPipelineInterf
         foreach (static::$_pipes as $type => $pipe) {
             static::$_pipes[$type] = new $pipe;
 
-            #set some settings on pipes dependend on their type (array-reference) which may be fragile but works for now
-            static::$_pipes[$type]->setCacheDirectory(static::$config['cacheDirectory']);
-
             static::$_pipes[$type]->useFolders(static::$config['useFolders']);
 
             static::$_pipes[$type]->setAssetDirectory(
@@ -42,6 +38,9 @@ class AssetPipeline extends Controller implements interfaces\AssetPipelineInterf
                 static::$config['assetDirectories'][$type]['fallbacks'],
                 static::$config['assetRootDirectory']
             );
+
+            #set some settings on pipes dependend on their type (array-reference) which may be fragile but works for now
+            static::$_pipes[$type]->setCacheDirectory(static::$config['cacheDirectory']);
         }
     }
 
@@ -57,8 +56,13 @@ class AssetPipeline extends Controller implements interfaces\AssetPipelineInterf
     public static function configure($assetRootDirectory)
     {
         static::$config = array_replace_recursive(
-            static::$_helper->asArray(json_decode( file_get_contents(dirname(dirname(__FILE__)) . '/config.json') )),
-            static::$_helper->asArray(LVCConfig::get()->assetpipeline ?: [])
+            static::$_helper->asArray(
+               json_decode(
+                  file_get_contents(static::$_helper->path([dirname(__FILE__), '..', 'config.json']))
+               )
+            ),
+
+           static::$_helper->asArray(Config::get()->assetpipeline ?: [])
         );
 
         static::$config['assetRootDirectory'] = $assetRootDirectory;

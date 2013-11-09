@@ -4,7 +4,6 @@ namespace Scandio\lmvc\modules\registration\controllers;
 
 use Scandio\lmvc;
 use Scandio\lmvc\Controller;
-use Scandio\lmvc\LVCConfig;
 use Scandio\lmvc\modules\registration\Registration as RegistrationMediator;
 use Scandio\lmvc\modules\registration\forms;
 use Scandio\lmvc\modules\security;

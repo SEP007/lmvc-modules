@@ -25,7 +25,7 @@ class ImagePipe extends AbstractAssetPipe
     /**
      * The abstract process method to be called whenever file needs to be handled by this pipe.
      *
-     * @param $asset which should be processed by this pipe
+     * @param $asset which should be processed by this pipe (its filepath)
      * @param array $options to be applied on asset (e.g. min)
      * @param string describing errors during file location process
      *
@@ -33,8 +33,6 @@ class ImagePipe extends AbstractAssetPipe
      */
     public function process($asset, $options = [], $errors = '')
     {
-        $file = $this->_assetDirectory . DIRECTORY_SEPARATOR . $asset;
-
         $img = Image::make($asset);
 
         if (isset($options[0]) && isset($options[1])) {

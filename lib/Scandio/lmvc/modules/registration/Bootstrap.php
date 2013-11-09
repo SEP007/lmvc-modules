@@ -4,7 +4,7 @@ namespace Scandio\lmvc\modules\registration;
 
 use Scandio\lmvc\LVC;
 
-class Bootstrap extends \Scandio\lmvc\Bootstrap
+class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
 {
     /**
      * Registers the module controller namespace and the views directory
@@ -12,6 +12,6 @@ class Bootstrap extends \Scandio\lmvc\Bootstrap
     public function initialize()
     {
         LVC::registerControllerNamespace(new controllers\Registration());
-        LVC::registerViewDirectory(static::getPath() . '/views/');
+        LVC::registerViewDirectory(static::getPath() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
     }
 }
