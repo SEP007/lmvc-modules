@@ -15,13 +15,14 @@ on any controller's `render($args)` call. Other render modules are accessable th
       "extension": "php"
    },
    "additionals": [{
-      "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\Smarty",
-      "handle": "smarty",
-      "extension": "smarty"
-   }, {
-      "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\Json",
-      "handle": "json",
-      "extension": null
+      "smarty" : {
+         "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\Smarty",
+         "extension": "smarty"
+      }, {
+      "json": {
+         "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\Json",
+         "extension": null
+      }
    }]
 }
 ```
