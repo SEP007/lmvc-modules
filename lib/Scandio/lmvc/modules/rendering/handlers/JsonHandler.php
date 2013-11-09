@@ -4,8 +4,10 @@ namespace Scandio\lmvc\modules\rendering\handlers;
 
 class Json extends AbstractHandler
 {
-    public function render($template = null)
+    public function render($renderArgs = [], $template = null)
     {
+        $this->setRenderArgs($renderArgs, true);
+
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1964 07:00:00 GMT');
 

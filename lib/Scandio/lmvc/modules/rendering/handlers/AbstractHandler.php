@@ -9,7 +9,7 @@ abstract class AbstractHandler implements interfaces\RendererInterface
     protected
         $_renderArgs = [];
 
-    abstract function render($template = null);
+    abstract function render($renderArgs = [], $template = null);
 
     public function setRenderArgs($renderArgs, $merge = false)
     {
