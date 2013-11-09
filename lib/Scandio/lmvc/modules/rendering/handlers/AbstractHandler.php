@@ -9,9 +9,9 @@ abstract class AbstractHandler implements interfaces\RendererInterface
     private
         $_renderArgs = [];
 
-    abstract public function render($template);
+    abstract function render($template = null);
 
-    public static function setRenderArgs($renderArgs)
+    public function setRenderArgs($renderArgs)
     {
         $this->_renderArgs = (array) $renderArgs;
     }
