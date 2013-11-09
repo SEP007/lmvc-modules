@@ -15,4 +15,9 @@ abstract class AbstractHandler implements interfaces\RendererInterface
     {
         $this->_renderArgs = (array) $renderArgs;
     }
+
+    public function getFile($path)
+    {
+        return file_get_contents($path);
+    }
 }
