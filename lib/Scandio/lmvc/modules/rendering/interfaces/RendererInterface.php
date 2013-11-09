@@ -8,6 +8,6 @@ namespace Scandio\lmvc\modules\rendering\interfaces;
  */
 interface RendererInterface
 {
-    public static function setRenderArgs($renderArgs);
-    public static function render($template);
+    public function setRenderArgs($renderArgs);
+    public function render($template = null);
 }

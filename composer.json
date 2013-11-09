@@ -21,6 +21,7 @@
         "scandio/troba": "dev-master",
         "leafo/lessphp": "dev-master",
         "mustache/mustache": "dev-master",
+        "smarty/smarty": "dev-trunk",
         "leafo/scssphp": "dev-master",
         "nitra/php-min": "dev-master",
         "intervention/image": "dev-master",
