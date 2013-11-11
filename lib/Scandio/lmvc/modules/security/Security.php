@@ -20,6 +20,7 @@ class Security
         if (is_null(static::$principal)) {
             $class = Config::get()->security->principal;
             $userClass = null;
+
             if (isset(Config::get()->security->principalUser)) {
                 $userClass = Config::get()->security->principalUser;
             }

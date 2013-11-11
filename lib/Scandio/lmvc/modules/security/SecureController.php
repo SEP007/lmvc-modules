@@ -15,7 +15,7 @@ class SecureController extends AnonymousController
         if (!parent::preProcess()) {
             return false;
         }
-        if (!static::$currentUser->isAuthenticated()) {
+        if (!Security::get()->isAuthenticated()) {
             Session::set('security.called_before_login', $_SERVER['REQUEST_URI']);
 
             static::redirect('Security::login');
