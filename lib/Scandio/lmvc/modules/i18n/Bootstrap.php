@@ -9,7 +9,7 @@ class Bootstrap extends \Scandio\lmvc\Bootstrap
 		
 	public static function configure($assetRootDirectory)
 	{
-		controllers\I18n::configure($assetRootDirectory);
+		I18nWrapper::loadIfNeeded($assetRootDirectory);
 	}
 	
 	/**
