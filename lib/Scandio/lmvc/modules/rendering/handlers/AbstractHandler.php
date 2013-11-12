@@ -74,6 +74,8 @@ abstract class AbstractHandler implements interfaces\RendererInterface
     }
 
     /**
+     * Searches a view (fully qualified path) within one of the given viewPaths of the `config.json`
+     *
      * @param $view
      * @return bool|string false if view could not be found otherwise a string containting the view's name
      */
@@ -88,6 +90,7 @@ abstract class AbstractHandler implements interfaces\RendererInterface
                 return $viewPath;
             }
         }
+
         return false;
     }
 
