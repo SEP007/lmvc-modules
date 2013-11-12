@@ -10,22 +10,26 @@ on any controller's `render($args)` call. Other render modules are accessable th
 
 ```json
 "rendering": {
-   "default": {
-      "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\PlainHandler",
-      "extension": "html"
-   },
-   "additionals": {
-      "smarty" : {
-          "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\SmartyHandler",
-          "extension": "smarty"
+   "handlers": {
+      "php": {
+         "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\PhpHandler",
+         "extension": "html"
+      },
+      "smarty": {
+         "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\SmartyHandler",
+         "extension": "smarty"
+      },
+      "mustache": {
+         "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\MustacheHandler",
+         "extension": "mustache"
       },
       "json": {
-          "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\JsonHandler",
-          "extension": null
+         "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\JsonHandler",
+         "extension": null
       },
       "html": {
-          "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\HtmlHandler",
-          "extension": null
+         "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\HtmlHandler",
+         "extension": null
       }
    }
 }
