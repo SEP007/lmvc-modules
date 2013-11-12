@@ -11,6 +11,7 @@ namespace Scandio\lmvc\modules\rendering\interfaces;
 interface RendererInterface
 {
     public function setRenderArgs($renderArgs, $merge = false);
-    public function render($renderArgs = [], $template = null);
+    public function render($renderArgs = []);
     public function getExtention();
+    public function setState($state);
 }

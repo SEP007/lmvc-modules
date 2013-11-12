@@ -27,16 +27,15 @@ class MustacheHandler extends AbstractHandler
      * Renders a given mustache template with the render args.
      *
      * @param array $renderArgs to be made accessible in mustache template
-     * @param null $template string to template file
      *
      * @return string rendered mustache template
      */
-    public function render($renderArgs = [], $template)
+    public function render($renderArgs = [])
     {
         $this->setRenderArgs($renderArgs, true);
 
         return $this->_mustacheEngine->render(
-            $this->getFile($template),
+            $this->getFile($this->searchView()),
             $this->getRenderArgs()
         );
     }

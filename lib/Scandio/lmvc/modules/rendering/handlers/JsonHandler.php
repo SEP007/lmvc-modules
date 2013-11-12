@@ -17,11 +17,10 @@ class JsonHandler extends AbstractHandler
      *  Uses the Jsonp callback from the GET array.
      *
      * @param array $renderArgs to be serialized
-     * @param null $template never used here
      *
      * @return bool always truethy
      */
-    public function render($renderArgs = [], $template = null)
+    public function render($renderArgs = [])
     {
         $this->setRenderArgs($renderArgs, true);
 

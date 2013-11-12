@@ -3,6 +3,7 @@
 namespace Scandio\lmvc\modules\rendering\handlers;
 
 use Scandio\lmvc\modules\rendering\interfaces;
+use Scandio\lmvc\utils\config\Config;
 
 /**
  * Class AbstractHandler
@@ -14,6 +15,7 @@ abstract class AbstractHandler implements interfaces\RendererInterface
 {
     protected
         $_renderArgs = [],
+        $_state      = [],
         $_config     = null;
 
     # To be passed on the specific renderer
@@ -68,6 +70,35 @@ abstract class AbstractHandler implements interfaces\RendererInterface
      */
     public function getExtention()
     {
-        return $this->_config->extention;
+        return $this->_config->extension;
+    }
+
+    /**
+     * @param $view
+     * @return bool|string false if view could not be found otherwise a string containting the view's name
+     */
+    protected function searchView($view)
+    {
+        $config = Config::get();
+
+        foreach ($config->viewPath as $path) {
+            $viewPath = ((substr($path, 0, 1) == '/') ? '' : $this->_state['appPath']) . $path . DIRECTORY_SEPARATOR . $view;
+
+            if (file_exists($viewPath)) {
+                return $viewPath;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Sets the current applications state for later processing such
+     * as patch guessing.
+     *
+     * @param $state of the application
+     */
+    public function setState($state)
+    {
+        $this->_state = $state;
     }
 }
