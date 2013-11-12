@@ -4,9 +4,12 @@ namespace Scandio\lmvc\modules\upload\controllers;
 
 use Scandio\lmvc\LVC;
 use Scandio\lmvc\Controller;
+use Scandio\lmvc\modules\rendering\traits;
 
 class Upload extends Controller
 {
+    use traits\RendererController;
+
     protected static
         $config = [],
         $defaults = [

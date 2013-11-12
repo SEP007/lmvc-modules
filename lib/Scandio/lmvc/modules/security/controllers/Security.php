@@ -8,9 +8,12 @@ use Scandio\lmvc\modules\session\Session;
 use Scandio\lmvc\modules\snippets\Snippets;
 use Scandio\lmvc\modules\security\AnonymousController;
 use Scandio\lmvc\modules\security\Security as SecurityPrincipal;
+use Scandio\lmvc\modules\rendering\traits;
 
 class Security extends AnonymousController
 {
+    use traits\RendererController;
+
     /**
      * @return bool
      */
