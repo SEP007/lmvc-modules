@@ -14,11 +14,10 @@ class HtmlHandler extends AbstractHandler
      * Pipes an Html string.
      *
      * @param array $renderArgs to be casted into string
-     * @param null $template not used here
      *
      * @return bool always truethy
      */
-    public function render($renderArgs = [], $template = null)
+    public function render($renderArgs = [])
     {
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1964 07:00:00 GMT');
