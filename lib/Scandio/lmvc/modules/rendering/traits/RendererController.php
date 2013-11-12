@@ -34,18 +34,33 @@ trait RendererController
         self::$renderArgs[$name] = $value;
     }
 
+    # Shorthand and compability fallback for renderEngine('php' ...)
     public static function render($renderArgs = array(), $template = null, $httpCode = 200, $masterTemplate = null)
     {
         static::renderEngine('php', $renderArgs, ['minor' => $template, 'major' => $masterTemplate], $httpCode);
     }
 
+    # Shorthand and compability fallback for renderEngine('json' ...)
     public static function renderJson($renderArgs = null, $httpCode = 200, ArrayBuilderInterface $arrayBuilder = null)
     {
         static::renderEngine('json', $renderArgs, $httpCode, null);
     }
 
+    # Shorthand and compability fallback for renderEngine('html' ...) - I guess you got it by now ;-)
     public static function renderHtml($html, $httpCode = 200)
     {
         static::renderEngine('html', $html, $httpCode);
+    }
+
+    # Shorthand and compability fallback for renderEngine('mustache' ...)
+    public static function renderMustache($renderArgs, $httpCode = 200)
+    {
+        static::renderEngine('mustache', $renderArgs, $httpCode);
+    }
+
+    # Shorthand and compability fallback for renderEngine('smarty' ...)
+    public static function renderSmarty($renderArgs, $httpCode = 200)
+    {
+        static::renderEngine('smarty', $renderArgs, $httpCode);
     }
 }

@@ -26,13 +26,17 @@ class PhpHandler extends AbstractHandler
      */
     public function render($renderArgs = [], $templates = null)
     {
+        # Extract renderArgs to make them globally available in template
         extract($this->_renderArgs);
+        # Shorthand these for later
         $state  = $this->_state;
         $app    = LVC::get();
 
+        # If a minor template is specified directly use it under from the app path
         if ( isset($templates['minor']) && $templates['minor'] != null ) {
             $app->view = $state['appPath'] . $templates['minor'];
         } else {
+            # ... otherwise go on a wild hunt searching for it
             $app->view = self::searchView(
               StringUtils::camelCaseTo($state['controller']) . DIRECTORY_SEPARATOR .
               StringUtils::camelCaseTo($state['action']) . "." .
@@ -40,12 +44,15 @@ class PhpHandler extends AbstractHandler
             );
         }
 
+        # Same for the master template, if specified take it
         if ( isset($templates['major'])  && $templates['major'] != null) {
             $masterTemplate = $state['appPath'] . $masterTemplate;
         } else {
+            # ... else fallback to default as `main.html`
             $masterTemplate = $this->searchView('main.html');
         }
 
+        # includes major template which should have a minor inside
         include($masterTemplate);
 
         return true;
