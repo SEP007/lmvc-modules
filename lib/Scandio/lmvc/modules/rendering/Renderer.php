@@ -31,7 +31,7 @@ class Renderer
         # If renderer not instanciated and cached yet
         if ( !array_key_exists($engine, static::$renderers) ) {
             # Get the configuration of requested renderer
-            $config = Config::get()->rendering->additionals->{$engine};
+            $config = Config::get()->rendering->handlers->{$engine};
             $class  = $config->namespace;
 
             # Check if class exists and object would be correct implementation of RendererInterface
