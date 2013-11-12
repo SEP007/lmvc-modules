@@ -7,10 +7,12 @@ use Scandio\lmvc\Controller;
 use Scandio\lmvc\modules\registration\Registration as RegistrationMediator;
 use Scandio\lmvc\modules\registration\forms;
 use Scandio\lmvc\modules\security;
-
+use Scandio\lmvc\modules\rendering\traits;
 
 class Registration extends Controller
 {
+    use traits\RendererController;
+
     public static function index()
     {
         return static::redirect('Registration::signup');
