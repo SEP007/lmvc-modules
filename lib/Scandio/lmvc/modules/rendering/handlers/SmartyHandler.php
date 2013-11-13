@@ -10,6 +10,10 @@ namespace Scandio\lmvc\modules\rendering\handlers;
  */
 class SmartyHandler extends AbstractHandler
 {
+    function __construct(){
+        $this->_smarty = new \Smarty();
+    }
+
     /**
      * Renders a smarty template at a path.
      *
@@ -19,5 +23,7 @@ class SmartyHandler extends AbstractHandler
     public function render($renderArgs = [], $template = null)
     {
         $this->setRenderArgs($renderArgs, true);
+
+
     }
 }

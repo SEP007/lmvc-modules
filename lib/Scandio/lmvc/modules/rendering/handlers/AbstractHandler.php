@@ -4,6 +4,7 @@ namespace Scandio\lmvc\modules\rendering\handlers;
 
 use Scandio\lmvc\modules\rendering\interfaces;
 use Scandio\lmvc\utils\config\Config;
+use Scandio\lmvc\utils\string\StringUtils;
 
 /**
  * Class AbstractHandler
@@ -49,7 +50,7 @@ abstract class AbstractHandler implements interfaces\RendererInterface
      */
     public function getRenderArgs()
     {
-        return $this->_renderArgs;
+        return (array) $this->_renderArgs;
     }
 
     /**
@@ -122,5 +123,13 @@ abstract class AbstractHandler implements interfaces\RendererInterface
         } else {
             return false;
         }
+    }
+
+    protected function getPathByState()
+    {
+        return
+          StringUtils::camelCaseTo($this->_state['controller']) . DIRECTORY_SEPARATOR .
+          StringUtils::camelCaseTo($this->_state['action']) . "." .
+          $this->getExtention();
     }
 }

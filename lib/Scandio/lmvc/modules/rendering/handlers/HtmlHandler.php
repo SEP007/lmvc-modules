@@ -17,7 +17,7 @@ class HtmlHandler extends AbstractHandler
      *
      * @return bool always truethy
      */
-    public function render($renderArgs = [])
+    public function render($renderArgs = [], $templates = null)
     {
         $this->setHeader('Cache-Control: no-cache, must-revalidate');
         $this->setHeader('Expires: Mon, 26 Jul 1964 07:00:00 GMT');

@@ -37,26 +37,34 @@ class PhpHandler extends AbstractHandler
         # If a minor template is specified directly use it under from the app path
         if ( isset($templates['minor']) && $templates['minor'] != null ) {
             $app->view = $state['appPath'] . $templates['minor'];
+            var_dump($app->view);
         } else {
             # ... otherwise go on a wild hunt searching for it
             $app->view = self::searchView(
-              StringUtils::camelCaseTo($state['controller']) . DIRECTORY_SEPARATOR .
-              StringUtils::camelCaseTo($state['action']) . "." .
-              $this->getExtention()
+              $this->getPathByState()
             );
         }
 
         # Same for the master template, if specified take it
         if ( isset($templates['major'])  && $templates['major'] != null) {
             $masterTemplate = $state['appPath'] . $masterTemplate;
+
+            # ... set to false for homogeneous variable value
+            if ( !file_exists($masterTemplate)) { $masterTemplate = false; }
         } else {
             # ... else fallback to default as `main.html`
             $masterTemplate = $this->searchView('main.html');
         }
 
-        # includes major template which should have a minor inside
-        include($masterTemplate);
+        if ($masterTemplate !== false) {
+            # includes major template which should have a minor inside
+            include($masterTemplate);
 
-        return true;
+            return $masterTemplate;
+        } else {
+            include($app->view);
+
+            return $app->view;
+        }
     }
 }
