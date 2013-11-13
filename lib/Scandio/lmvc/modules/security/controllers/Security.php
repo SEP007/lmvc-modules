@@ -2,7 +2,7 @@
 
 namespace Scandio\lmvc\modules\security\controllers;
 
-use Scandio\lmvc\LVCConfig;
+use Scandio\lmvc\utils\config\Config;
 use Scandio\lmvc\LVC;
 use Scandio\lmvc\modules\session\Session;
 use Scandio\lmvc\modules\snippets\Snippets;
@@ -53,14 +53,19 @@ class Security extends AnonymousController
     }
 
     /**
+     * @paramm bool $writeSession indicates if login result should be stored in session
+     *
      * @return array
      */
-    protected static function authenticate()
+    protected static function authenticate($writeSession = true)
     {
         $principal = SecurityPrincipal::get();
         if ($principal->authenticate(static::request()->username, static::request()->password)) {
-            Session::set('security.current_user', static::request()->username);
-            Session::set('security.authenticated', true);
+
+            if ($writeSession === true) {
+                Session::set('security.current_user', static::request()->username);
+                Session::set('security.authenticated', true);
+            }
 
             $uri = Session::get('security.called_before_login');
             Session::set('security.called_before_login', null);
@@ -84,7 +89,7 @@ class Security extends AnonymousController
     {
         Session::stop();
 
-        $logoutAction = (isset(LVCConfig::get()->security->logoutAction)) ? LVCConfig::get()->security->logoutAction : 'Application::index';
+        $logoutAction = (isset(Config::get()->security->logoutAction)) ? Config::get()->security->logoutAction : 'Application::index';
         return static::redirect($logoutAction);
     }
 
