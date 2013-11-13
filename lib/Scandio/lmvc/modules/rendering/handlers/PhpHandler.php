@@ -26,6 +26,8 @@ class PhpHandler extends AbstractHandler
      */
     public function render($renderArgs = [], $templates = null)
     {
+        $this->setRenderArgs($renderArgs, true);
+
         # Extract renderArgs to make them globally available in template
         extract($this->_renderArgs);
         # Shorthand these for later

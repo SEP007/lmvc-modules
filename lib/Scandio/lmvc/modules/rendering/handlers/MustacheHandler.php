@@ -32,9 +32,13 @@ class MustacheHandler extends AbstractHandler
     {
         $this->setRenderArgs($renderArgs, true);
 
-        return $this->_mustacheEngine->render(
-            $this->getFile($this->searchView()),
-            $this->getRenderArgs()
+        $mustache = $this->_mustacheEngine->render(
+          $this->getFile($this->searchView()),
+          $this->getRenderArgs()
         );
+
+        echo $mustache;
+
+        return $mustache;
     }
 }
