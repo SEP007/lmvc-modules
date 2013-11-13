@@ -2,6 +2,7 @@
    <testsuites>
       <testsuite name="AssetPipeline">
          <directory suffix=".php">assetpipeline</directory>
+         <directory suffix=".php">rendering</directory>
       </testsuite>
    </testsuites>
 

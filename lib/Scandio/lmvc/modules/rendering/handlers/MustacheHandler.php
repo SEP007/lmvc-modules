@@ -18,8 +18,6 @@ class MustacheHandler extends AbstractHandler
      */
     function __construct()
     {
-        parent::__construct();
-
         $this->_mustacheEngine = new \Mustache_Engine();
     }
 

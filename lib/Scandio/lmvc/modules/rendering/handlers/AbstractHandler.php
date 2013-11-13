@@ -19,7 +19,7 @@ abstract class AbstractHandler implements interfaces\RendererInterface
         $_config     = null;
 
     # To be passed on the specific renderer
-    abstract function render($renderArgs = [], $template = null);
+    abstract function render($renderArgs = []);
 
     /**
      * Intializes renderer with config object
