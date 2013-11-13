@@ -74,6 +74,17 @@ abstract class AbstractHandler implements interfaces\RendererInterface
     }
 
     /**
+     * Sets the current applications state for later processing such
+     * as patch guessing.
+     *
+     * @param $state of the application
+     */
+    public function setState($state)
+    {
+        $this->_state = $state;
+    }
+
+    /**
      * Searches a view (fully qualified path) within one of the given viewPaths of the `config.json`
      *
      * @param $view
@@ -95,13 +106,21 @@ abstract class AbstractHandler implements interfaces\RendererInterface
     }
 
     /**
-     * Sets the current applications state for later processing such
-     * as patch guessing.
+     * Sets a value ($string) as a header (header(...)) if headers
+     * have not already been send.
      *
-     * @param $state of the application
+     * @param $string which should be set as a header
+     * @return bool indicating if setting was successful
      */
-    public function setState($state)
+    protected function setHeader($string)
     {
-        $this->_state = $state;
+        # Safely only set headers if they haven't been already sent
+        if (!headers_sent()) {
+            header($string);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

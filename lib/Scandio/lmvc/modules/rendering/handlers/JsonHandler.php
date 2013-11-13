@@ -24,19 +24,19 @@ class JsonHandler extends AbstractHandler
     {
         $this->setRenderArgs($renderArgs, true);
 
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Mon, 26 Jul 1964 07:00:00 GMT');
+        $this->setHeader('Cache-Control: no-cache, must-revalidate');
+        $this->setHeader('Expires: Mon, 26 Jul 1964 07:00:00 GMT');
 
         $json = $this->_buildJson();
 
         if (isset($_GET['callback']) && !empty($_GET['callback'])) {
-            header('Content-type: application/javascript');
+            $this->setHeader('Content-type: application/javascript');
 
             $callback = $_GET['callback'];
 
             $json = $callback . '( return ' . $json . ');';
         } else {
-            header('Content-type: application/json');
+            $this->setHeader('Content-type: application/json');
         }
 
         echo $json;
