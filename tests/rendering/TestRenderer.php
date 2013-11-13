@@ -21,7 +21,7 @@ class TestRenderer extends PHPUnit_Framework_TestCase
 
         Config::get()->views = [$this->_rootPath . DIRECTORY_SEPARATOR . 'templates'];
 
-        $this->_renderArgs = ['Homer', 'Marge', 'Bart'];
+        $this->_renderArgs = ['users' => ['Homer', 'Marge', 'Bart']];
     }
 
     public function testRendererInstanceTypes()
@@ -39,6 +39,31 @@ class TestRenderer extends PHPUnit_Framework_TestCase
         $html     = $this->getTemplate('tmpl-html.html');
 
         $this->assertEquals($this->trim($renderer->render($html)), $this->trim($html));
+    }
+
+    public function testRenderingJson()
+    {
+        $renderer = Renderer::get('json');
+        $json     = json_decode( $this->getTemplate('tmpl-json.json') );
+
+        $this->assertEquals($this->trim($renderer->render($json)), $this->trim(json_encode($json)));
+    }
+
+    public function testRenderingMustache()
+    {
+        $renderer   = Renderer::get('mustache');
+        $mustache   = $this->getTemplate('tmpl-mustache.mustache');
+        $html       = $this->getTemplate('tmpl-html.html');
+
+        $renderer->setState(['appPath' => $this->_templatePath]);
+
+        $this->assertEquals(
+          $this->trim($renderer->render(
+            $this->_renderArgs,
+            'tmpl-mustache.mustache'
+          )),
+          $this->trim($html)
+        );
     }
 
     private function getTemplate($name)
