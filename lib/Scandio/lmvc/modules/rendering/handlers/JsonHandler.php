@@ -41,7 +41,7 @@ class JsonHandler extends AbstractHandler
 
         echo $json;
 
-        return true;
+        return $json;
     }
 
     /**

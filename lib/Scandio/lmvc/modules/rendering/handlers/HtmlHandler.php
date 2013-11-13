@@ -24,6 +24,6 @@ class HtmlHandler extends AbstractHandler
 
         echo (string) $renderArgs;
 
-        return true;
+        return (string) $renderArgs;
     }
 }
