@@ -1,9 +1,9 @@
 <?php
     namespace Scandio\lmvc\modules\i18n;
     
+    use Scandio\lmvc\utils\Config;
     use Scandio\lmvc\modules\i18n\controllers\I18n;
     use Scandio\lmvc\modules\session\Session;
-    use Scandio\lmvc\LVCConfig;
     use Scandio\lmvc\modules\i18n\handler\YamlHandler;
     use Scandio\lmvc\modules\i18n\handler\JsonHandler;
     
@@ -14,9 +14,8 @@
             $translations = array(),
             $selectedLanguages = array();
         
-        //this will do the caching later on
         public static function loadIfNeeded($rootDirectory) {        
-            static::$language = Session::get('i18n.language', LVCConfig::get()->I18n->default);
+            static::$language = Session::get('i18n.language', Config::get()->I18n->default);
        
             /*if the language is stored this means we have used
              *it in the past and thus the file is already loaded.
@@ -26,7 +25,7 @@
            }
             
             $path = $rootDirectory . 
-                            DIRECTORY_SEPARATOR . LVCConfig::get()->I18n->path . 
+                            DIRECTORY_SEPARATOR . Config::get()->I18n->path . 
                             DIRECTORY_SEPARATOR . static::$language;
                             
             self::loadFile($path);
@@ -34,7 +33,7 @@
             
         private static function loadFile($path) {
             
-            $format = LVCConfig::get()->I18n->format;
+            $format = Config::get()->I18n->format;
             
             $filePath = $path . '.' . $format;
             

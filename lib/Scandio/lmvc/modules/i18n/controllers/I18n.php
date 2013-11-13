@@ -2,15 +2,15 @@
 	namespace Scandio\lmvc\modules\i18n\controllers;
 	
 	use Scandio\lmvc\Controller;
+    use Scandio\lmvc\utils\Config;
 	use Scandio\lmvc\modules\session\Session;
     use Scandio\lmvc\modules\i18n\handler\YamlHandler;
-    use Scandio\lmvc\LVCConfig;
 	
 	class I18n extends Controller {
         
         public static function index()
         {
-            return static::redirect('I18n::language', LVCConfig::get()->I18n->default);
+            return static::redirect('I18n::language', Config::get()->I18n->default);
         }
 		
 		public static function language($language) {
