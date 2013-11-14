@@ -37,7 +37,6 @@ class PhpHandler extends AbstractHandler
         # If a minor template is specified directly use it under from the app path
         if ( isset($templates['minor']) && $templates['minor'] != null ) {
             $app->view = $state['appPath'] . $templates['minor'];
-            var_dump($app->view);
         } else {
             # ... otherwise go on a wild hunt searching for it
             $app->view = self::searchView(
