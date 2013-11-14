@@ -15,11 +15,12 @@ class TestRenderer extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_rootPath     = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-        $this->_templatePath = $this->_rootPath . DIRECTORY_SEPARATOR . 'templates';
+        $this->_templatePath = $this->_rootPath . 'templates';
 
         Config::initialize($this->_rootPath . 'config.json');
 
-        Config::get()->views = [$this->_rootPath . DIRECTORY_SEPARATOR . 'templates'];
+        Config::get()->views = [$this->_rootPath . 'templates'];
+        Config::get()->viewPath = ['templates'];
 
         $this->_renderArgs = ['users' => ['Homer', 'Marge', 'Bart']];
     }
@@ -49,6 +50,26 @@ class TestRenderer extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->trim($renderer->render($json)), $this->trim(json_encode($json)));
     }
 
+    public function testRenderingJsonp()
+    {
+        $renderer           = Renderer::get('json');
+        $json               = json_decode( $this->getTemplate('tmpl-json.json') );
+        $_GET['callback']   = 'itssosecure';
+        $jsonp              = $_GET['callback'] . '( return %s );';
+
+        # ... pressing flush on the old render args
+        $renderer->setRenderArgs([], false);
+
+        $this->assertEquals(
+          $this->trim(
+            $renderer->render($json)
+          ),
+          $this->trim(
+            sprintf($jsonp, json_encode($json))
+          )
+        );
+    }
+
     public function testRenderingMustache()
     {
         $renderer   = Renderer::get('mustache');
@@ -64,6 +85,17 @@ class TestRenderer extends PHPUnit_Framework_TestCase
           )),
           $this->trim($html)
         );
+    }
+
+    public function testSearchView()
+    {
+        $renderer   = Renderer::get('mustache');
+        $renderer->setState(['appPath' => $this->_rootPath]);
+
+        $view = $renderer->searchView('tmpl-mustache.mustache');
+
+        $this->assertEquals($view, $this->_templatePath . DIRECTORY_SEPARATOR . 'tmpl-mustache.mustache');
+        $this->assertFalse($renderer->searchView('i-am-not-existent.mustache'));
     }
 
     private function getTemplate($name)

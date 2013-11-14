@@ -91,7 +91,7 @@ abstract class AbstractHandler implements interfaces\RendererInterface
      * @param $view
      * @return bool|string false if view could not be found otherwise a string containting the view's name
      */
-    protected function searchView($view)
+    public function searchView($view)
     {
         $config = Config::get();
 
