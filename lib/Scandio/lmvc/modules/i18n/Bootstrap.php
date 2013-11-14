@@ -4,7 +4,7 @@ namespace Scandio\lmvc\modules\i18n;
 
 use Scandio\lmvc\LVC;
 
-class Bootstrap extends \Scandio\lmvc\Bootstrap
+class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
 {
 		
 	public static function configure($assetRootDirectory)

@@ -1,7 +1,7 @@
 <?php
     namespace Scandio\lmvc\modules\i18n;
     
-    use Scandio\lmvc\utils\Config;
+    use Scandio\lmvc\utils\config\Config;
     use Scandio\lmvc\modules\i18n\controllers\I18n;
     use Scandio\lmvc\modules\session\Session;
     use Scandio\lmvc\modules\i18n\handler\YamlHandler;

@@ -2,7 +2,7 @@
 	namespace Scandio\lmvc\modules\i18n\controllers;
 	
 	use Scandio\lmvc\Controller;
-    use Scandio\lmvc\utils\Config;
+    use Scandio\lmvc\utils\config\Config;
 	use Scandio\lmvc\modules\session\Session;
     use Scandio\lmvc\modules\i18n\handler\YamlHandler;
 	
