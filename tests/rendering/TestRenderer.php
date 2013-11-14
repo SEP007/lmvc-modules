@@ -73,7 +73,6 @@ class TestRenderer extends PHPUnit_Framework_TestCase
     public function testRenderingMustache()
     {
         $renderer   = Renderer::get('mustache');
-        $mustache   = $this->getTemplate('tmpl-mustache.mustache');
         $html       = $this->getTemplate('tmpl-html.html');
 
         $renderer->setState(['appPath' => $this->_templatePath]);
@@ -82,6 +81,22 @@ class TestRenderer extends PHPUnit_Framework_TestCase
           $this->trim($renderer->render(
             $this->_renderArgs,
             'tmpl-mustache.mustache'
+          )),
+          $this->trim($html)
+        );
+    }
+
+    public function testRenderingSmarty()
+    {
+        $renderer   = Renderer::get('smarty');
+        $html       = $this->getTemplate('tmpl-html.html');
+
+        $renderer->setState(['appPath' => $this->_templatePath]);
+
+        $this->assertEquals(
+          $this->trim($renderer->render(
+            $this->_renderArgs,
+            'tmpl-smarty.smarty'
           )),
           $this->trim($html)
         );

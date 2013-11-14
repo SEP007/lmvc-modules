@@ -28,12 +28,12 @@ class MustacheHandler extends AbstractHandler
      *
      * @return string rendered mustache template
      */
-    public function render($renderArgs = [], $templates = null)
+    public function render($renderArgs = [], $template = null)
     {
         $this->setRenderArgs($renderArgs, true);
 
-        if ( is_string($templates) ) {
-            $mustacheTemplate = $this->_state['appPath'] . DIRECTORY_SEPARATOR . $templates;
+        if ( is_string($template) ) {
+            $mustacheTemplate = $this->_state['appPath'] . DIRECTORY_SEPARATOR . $template;
         } else {
             $mustacheTemplate = $this->searchView( $this->getPathByState() );
         }
