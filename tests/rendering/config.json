@@ -9,10 +9,10 @@
                 "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\SmartyHandler",
                 "extension": "smarty",
                 "directories": {
-                    "template": "templates",
-                    "compile": "compile",
-                    "cache": "_cache",
-                    "config": "config"
+                    "template": "smarty/templates",
+                    "compile": "smarty/compile",
+                    "cache": "smarty/_cache",
+                    "config": "smarty/config"
                 }
             },
             "mustache": {
