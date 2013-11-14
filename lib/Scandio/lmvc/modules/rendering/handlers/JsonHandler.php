@@ -34,7 +34,7 @@ class JsonHandler extends AbstractHandler
 
             $callback = $_GET['callback'];
 
-            $json = $callback . '( return ' . $json . ');';
+            $json = $callback . '( return ' . $json . ' );';
         } else {
             $this->setHeader('Content-type: application/json');
         }
