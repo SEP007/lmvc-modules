@@ -20,14 +20,19 @@ class SmartyHandler extends AbstractHandler
         $this->_smartyEngine = new \Smarty();
     }
 
+    /**
+     * Inits this renderer
+     *
+     * @param object $config to be read from to initialize this renderer
+     */
     public function initialize($config)
     {
         parent::initialize($config);
 
-        $this->_smartyEngine->setTemplateDir($config->directories->template);
-        $this->_smartyEngine->setCompileDir($config->directories->compile);
-        $this->_smartyEngine->setCacheDir($config->directories->cache);
-        $this->_smartyEngine->setConfigDir($config->directories->config);
+        $this->_smartyEngine->setTemplateDir(Config::get()->appPath . DIRECTORY_SEPARATOR . $config->directories->template);
+        $this->_smartyEngine->setCompileDir(Config::get()->appPath . DIRECTORY_SEPARATOR . $config->directories->compile);
+        $this->_smartyEngine->setCacheDir(Config::get()->appPath . DIRECTORY_SEPARATOR . $config->directories->cache);
+        $this->_smartyEngine->setConfigDir(Config::get()->appPath . DIRECTORY_SEPARATOR . $config->directories->config);
     }
 
     /**

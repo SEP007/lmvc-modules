@@ -19,8 +19,9 @@ class TestRenderer extends PHPUnit_Framework_TestCase
 
         Config::initialize($this->_rootPath . 'config.json');
 
-        Config::get()->views = [$this->_rootPath . 'templates'];
+        Config::get()->views    = [$this->_rootPath . 'templates'];
         Config::get()->viewPath = ['templates'];
+        Config::get()->appPath  = $this->_templatePath;
 
         $this->_renderArgs = ['users' => ['Homer', 'Marge', 'Bart']];
     }
