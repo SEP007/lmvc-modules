@@ -114,6 +114,18 @@ class TestRenderer extends PHPUnit_Framework_TestCase
         $this->assertFalse($renderer->searchView('i-am-not-existent.mustache'));
     }
 
+    public function testRegisteringViewDirectory()
+    {
+        $pathArray  = ['an', 'path'];
+        $pathString = 'another' . DIRECTORY_SEPARATOR . 'path';
+
+        Renderer::registerViewDirectory($pathArray);
+        Renderer::registerViewDirectory($pathString);
+
+        $this->assertContains(implode(DIRECTORY_SEPARATOR, $pathArray), Config::get()->viewPath);
+        $this->assertContains($pathString, Config::get()->viewPath);
+    }
+
     private function getTemplate($name)
     {
         return file_get_contents($this->_templatePath . DIRECTORY_SEPARATOR . $name);
