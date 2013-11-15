@@ -51,4 +51,26 @@ class Renderer
         # Return the requested renderer
         return static::$renderers[$engine];
     }
+
+    /**
+     * Registers a new view directory to search for the views
+     *
+     * @static
+     * @param array|string $path specifies the directory to register
+     * @return void
+     */
+    public static function registerViewDirectory($path)
+    {
+        if (is_array($path)) {
+            $viewPath = implode(DIRECTORY_SEPARATOR, $path);
+        } elseif (is_string($path)) {
+            $viewPath = $path;
+        } else {
+            echo PHP_EOL . "<!-- Couldn't register ViewDirectory:" . PHP_EOL;
+            print_r($path);
+            echo "-->" . PHP_EOL;
+            return;
+        }
+        array_unshift(Config::get()->viewPath, $viewPath);
+    }
 }
