@@ -59,3 +59,9 @@ Module handling uploads of various types. Currently only supports image uploads 
 Module abtracting from php's session handling. It allows getting, setting, merging and replacing its values without actually touching the $_SESSION variable.
 
 [Readme](lib/Scandio/lmvc/modules/session)
+
+## Rendering module
+
+This module's intention is to abstract from rendering with various templating languages in an `lmvc` application.
+
+[Readme](lib/Scandio/lmvc/modules/rendering)

@@ -1,0 +1,5 @@
+<ul>
+   {foreach from=$users item=user}
+      <li>{$user}</li>
+   {/foreach}
+</ul>
