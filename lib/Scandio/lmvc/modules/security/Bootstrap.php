@@ -4,6 +4,7 @@ namespace Scandio\lmvc\modules\security;
 
 use Scandio\lmvc\LVC;
 use Scandio\lmvc\modules\snippets\Snippets;
+use Scandio\lmvc\modules\rendering\Renderer;
 
 class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
 {
@@ -13,7 +14,7 @@ class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
     public function initialize()
     {
         LVC::registerControllerNamespace(new controllers\Security());
-        LVC::registerViewDirectory(static::getPath() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+        Renderer::registerViewDirectory(static::getPath() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
         Snippets::registerSnippetDirectory(self::getPath() . DIRECTORY_SEPARATOR . 'snippets');
     }
 }

@@ -1,0 +1,32 @@
+{
+    "rendering": {
+        "handlers": {
+            "php": {
+                "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\PhpHandler",
+                "extension": "html"
+            },
+            "smarty": {
+                "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\SmartyHandler",
+                "extension": "smarty",
+                "directories": {
+                    "template": "smarty/templates",
+                    "compile": "smarty/compile",
+                    "cache": "smarty/_cache",
+                    "config": "smarty/config"
+                }
+            },
+            "mustache": {
+                "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\MustacheHandler",
+                "extension": "mustache"
+            },
+            "json": {
+                "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\JsonHandler",
+                "extension": null
+            },
+            "html": {
+                "namespace": "\\Scandio\\lmvc\\modules\\rendering\\handlers\\HtmlHandler",
+                "extension": null
+            }
+        }
+    }
+}
