@@ -11,27 +11,15 @@
         
         private static 
             $language = null,
-            $translations = array(),
-            $selectedLanguages = array();
+            $translations = array();
         
-        public static function loadIfNeeded($rootDirectory) {        
+        public static function loadFile($rootDirectory) {
             static::$language = Session::get('i18n.language', Config::get()->I18n->default);
        
-            /*if the language is stored this means we have used
-             *it in the past and thus the file is already loaded.
-             */
-           if(self::isSelectedLanguageStored(static::$language)) {
-               return;
-           }
-            
             $path = $rootDirectory . 
                             DIRECTORY_SEPARATOR . Config::get()->I18n->path . 
                             DIRECTORY_SEPARATOR . static::$language;
-                            
-            self::loadFile($path);
-         }
             
-        private static function loadFile($path) {
             
             $format = Config::get()->I18n->format;
             
@@ -63,20 +51,6 @@
         public static function getLanguage()
         {
             return Session::get('i18n.language', static::$language);
-        }
-        
-        private static function isSelectedLanguageStored($language) 
-        {
-            static::$selectedLanguages = Session::get('i18n.selectedLanguages', []);
-            
-            if(in_array($language, static::$selectedLanguages)) {
-               return false;
-            }
-            
-            array_push(static::$selectedLanguages, $language);
-            Session::set('i18n.selectedLanguages', static::$selectedLanguages); 
-               
-            return true;
         }
         
     }

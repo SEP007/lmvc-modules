@@ -9,7 +9,7 @@ class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
 		
 	public static function configure($assetRootDirectory)
 	{
-		I18nWrapper::loadIfNeeded($assetRootDirectory);
+		I18nWrapper::loadFile($assetRootDirectory);
 	}
 	
 	/**
@@ -18,7 +18,6 @@ class Bootstrap extends \Scandio\lmvc\utils\bootstrap\Bootstrap
     public function initialize()
     {
         LVC::registerControllerNamespace(new controllers\I18n());
-		LVC::registerViewDirectory(static::getPath() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
     }
 
 }
