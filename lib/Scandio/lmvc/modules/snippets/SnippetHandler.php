@@ -17,6 +17,7 @@ abstract class SnippetHandler
      * used to include the snippets - behaviour may be overridden by private or public static functions
      *
      * @static
+     *
      * @param string $name camelCasedName of the snippet
      * @param array $params parameters passed to the snippet
      * @return mixed|string the result of your private static function, an ErrorMessage or just an empty string
