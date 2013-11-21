@@ -4,9 +4,12 @@ namespace Scandio\lmvc\modules\security;
 
 use Scandio\lmvc\modules\session\Session;
 use Scandio\lmvc\LVC;
+use Scandio\lmvc\modules\rendering\traits;
 
 class SecureController extends AnonymousController
 {
+    use traits\RendererController;
+
     /**
      * @return bool
      */
