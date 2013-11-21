@@ -13,7 +13,12 @@
             $language = null,
             $translations = array();
         
-        public static function loadFile($rootDirectory) {
+        /*
+         * Loads the file with the languages
+         * @param the directory where the translation files exist
+         */
+        public static function loadFile($rootDirectory) 
+        {
             static::$language = Session::get('i18n.language', Config::get()->I18n->default);
        
             $path = $rootDirectory . 
@@ -38,6 +43,11 @@
            
         }
         
+        /*
+         * Translates the given key
+         * @param the key we have assigned to a String in the 
+         * translation files 
+         */
         public static function translate($key) 
         {
             if (array_key_exists($key, self::$translations)) {
@@ -48,6 +58,9 @@
             }
         }
         
+        /*
+         * Gets the language from the Session
+         */
         public static function getLanguage()
         {
             return Session::get('i18n.language', static::$language);

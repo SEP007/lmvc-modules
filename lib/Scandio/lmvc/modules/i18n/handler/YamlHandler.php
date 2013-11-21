@@ -5,7 +5,8 @@
     
     class YamlHandler {
         
-        public static function loadFile($filePath) {
+        public static function loadFile($filePath) 
+        {
             return spyc_load_file($filePath);
         }
         
