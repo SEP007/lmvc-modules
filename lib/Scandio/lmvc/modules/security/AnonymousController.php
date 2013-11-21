@@ -35,7 +35,7 @@ class AnonymousController extends Controller
     public static function render($renderArgs = array(), $httpCode = 200, $template = null, $masterTemplate = null)
     {
         static::setRenderArg('currentUser', static::$currentUser);
-        return parent::render($renderArgs, $template, $httpCode, $masterTemplate);
+        return static::render($renderArgs, $template, $httpCode, $masterTemplate);
     }
 
     /**
