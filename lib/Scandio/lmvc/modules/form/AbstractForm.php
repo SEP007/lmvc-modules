@@ -41,10 +41,28 @@ abstract class AbstractForm
      */
     public function __construct()
     {
-        $this->__formdata = new \stdClass();
-        $reflection = new \ReflectionClass(get_class($this));
-        $this->__formdata->fields = $reflection->getDefaultProperties();
+        $this->__formdata           = new \stdClass();
+        $this->__formdata->fields   = $this->getFormdataFields();
+
         unset($this->__formdata->fields['__formdata']);
+    }
+
+    /**
+     * fetches the form fields by reflecting upon the instance
+     */
+    public function getFormdataFields()
+    {
+        $reflection         = new \ReflectionClass(get_class($this));
+        $potentialFields    = $reflection->getDefaultProperties();
+        $fields             = [];
+
+        foreach ($potentialFields as $name => $potentialField) {
+            if ( is_array($potentialField) ) {
+                $fields[$name] = $potentialField;
+            }
+        }
+
+        return $fields;
     }
 
     /**
