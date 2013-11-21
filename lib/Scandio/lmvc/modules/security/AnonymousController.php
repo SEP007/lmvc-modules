@@ -4,9 +4,12 @@ namespace Scandio\lmvc\modules\security;
 
 use Scandio\lmvc\Controller;
 use Scandio\lmvc\utils\config\Config;
+use Scandio\lmvc\modules\rendering\traits;
 
 class AnonymousController extends Controller
 {
+    use traits\RendererController;
+
     /**
      * @var AbstractUser
      */
