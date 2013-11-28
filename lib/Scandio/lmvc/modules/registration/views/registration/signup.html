@@ -9,10 +9,10 @@
     $errors['email'] = $errors['email'] ? $errors['email'] : [];
 ?>
 
-<form method="POST" action="<?= $app->url('Registration::signup') ?>">
-    <fieldset>
+<form method="POST" class="form-horizontal" action="<?= $app->url('Registration::signup') ?>">
+    <fieldset class="span6">
         <legend>Register</legend>
-        <div class="control-group">
+        <div class="required_field">
             <label class="control-label" for="username">Username</label>
             <div class="controls">
                 <input type="text" name="username" id="username">
@@ -22,7 +22,7 @@
                 <?php endforeach ?>
             </div>
         </div>
-        <div class="control-group">
+        <div class="required_field">
             <label class="control-label" for="password">Password</label>
             <div class="controls">
                 <input type="password" name="password" id="password" maxlength="30" data-indicator="pwindicator" />
@@ -37,7 +37,7 @@
 	            </div>
             </div>
         </div>
-        <div class="control-group">
+        <div class="required_field">
             <label class="control-label" for="password">Retype password</label>
             <div class="controls">
                 <input type="password" name="passwordRetyped" id="password-retyped">
@@ -53,7 +53,7 @@
                 <input type="text" name="fullname" id="fullname">
             </div>
         </div>
-        <div class="control-group">
+        <div class="required_field">
             <label class="control-label" for="password">E-Mail</label>
             <div class="controls">
                 <input type="email" name="email" id="email">
