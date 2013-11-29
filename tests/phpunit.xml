@@ -4,6 +4,9 @@
          <directory suffix=".php">assetpipeline</directory>
          <directory suffix=".php">rendering</directory>
       </testsuite>
+      <testsuite name="I18n">
+      	 <directory suffix=".php">i18n</directory>
+      </testsuite>
    </testsuites>
 
    <logging>
