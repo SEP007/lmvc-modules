@@ -8,10 +8,10 @@
     $errors['username'] = $errors['username'] ? $errors['username'] : [];
     $errors['email'] = $errors['email'] ? $errors['email'] : [];
 ?>
-<form method="POST" action="<?= $app->url('Registration::edit') ?>">
-    <fieldset>
+<form method="POST" class="form-horizontal" action="<?= $app->url('Registration::edit') ?>">
+    <fieldset class="span6">
         <legend>Register</legend>
-        <div class="control-group">
+        <div class="required_field">
             <label class="control-label" for="username">Username</label>
             <div class="controls">
                 <input readonly type="text" name="username" id="username" placeholder="Username" value="<?= $user->username ?>" />
@@ -21,7 +21,7 @@
                 <?php endforeach ?>
             </div>
         </div>
-        <div class="control-group">
+        <div class="required_field">
             <label class="control-label" for="password">Password</label>
             <div class="controls">
                 <input type="password" name="password" placeholder="Passwort" id="password" maxlength="30" data-indicator="pwindicator"/>
@@ -36,7 +36,7 @@
 	            </div>
             </div>
         </div>
-        <div class="control-group">
+        <div class="required_field">
             <label class="control-label" for="password">Retype password</label>
             <div class="controls">
                 <input type="password" name="passwordRetyped" placeholder="Retype password" id="password-retyped" />
@@ -52,7 +52,7 @@
                 <input type="text" name="fullname" id="fullname" placeholder="Fullname" value="<?= $user->fullname ?>" />
             </div>
         </div>
-        <div class="control-group">
+        <div class="required_field">
             <label class="control-label" for="password">E-Mail</label>
             <div class="controls">
                 <input type="email" name="email" id="email" placeholder="E-Mail" value="<?= $user->email ?>" />
@@ -80,5 +80,15 @@
         </div>
     </fieldset>
 </form>
-<?= UI::js(Asset::assets(['jquery.pwstrength.js'], ['path' => 'plugins'])) ?>
-<?= UI::js(Asset::assets(['jquery.password-strength.js'], ['path' => 'views'])) ?>
+
+<?= UI::css(Asset::assets(['jquery.ui.all.css'], [])) ?>
+
+<!-- Library includes -->
+<?= UI::js(Asset::assets(['jquery.ui.core.js'])) ?>
+<?= UI::js(Asset::assets(['jquery.ui.widget.js'])) ?>
+<?= UI::js(Asset::assets(['jquery.ui.position.js'])) ?>
+<?= UI::js(Asset::assets(['jquery.ui.menu.js'])) ?>
+<?= UI::js(Asset::assets(['jquery.ui.autocomplete.js'])) ?>
+
+<?= UI::js(Asset::assets(['jquery.pwstrength.js', 'jquery.emailAutocomplete.js'], ['path' => 'plugins'])) ?>
+<?= UI::js(Asset::assets(['jquery.password-strength.js', 'jquery.emailAutocomplete.js'], ['path' => 'views'])) ?>
