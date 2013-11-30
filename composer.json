@@ -26,6 +26,7 @@
         "nitra/php-min": "dev-master",
         "intervention/image": "dev-master",
         "coffeescript/coffeescript": "dev-master",
+        "mustangostang/spyc": "0.5.*@dev",
         "atelierspierrot/markdown-extended": "dev-master"
     },
     "repositories": [
