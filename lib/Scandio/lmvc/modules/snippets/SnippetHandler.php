@@ -17,6 +17,7 @@ abstract class SnippetHandler
      * used to include the snippets - behaviour may be overridden by private or public static functions
      *
      * @static
+     *
      * @param string $name camelCasedName of the snippet
      * @param array $params parameters passed to the snippet
      * @return mixed|string the result of your private static function, an ErrorMessage or just an empty string
@@ -31,6 +32,19 @@ abstract class SnippetHandler
             if (self::$snippetFile) {
                 $app = LVC::get(); // should be available in the snippet's scope as in views for convenience
                 include(self::$snippetFile);
+
+                # makes sure defaults are an array even if they're nulled
+                $snippetDefaults = (array) $snippetDefaults;
+
+                if (is_array($params[0])) {
+                    # merge defaults with actual
+                    $params = array_merge($snippetDefaults, $params[0]);
+
+                    # make $params available by extracting them globally
+                    extract($params);
+                }
+
+                # AND NOW I AM SCREWED AS I CAN'T INJECT THE EXTRACT INTO THE INCLUDE AGAIN...
             } elseif (preg_match('/^get[A-Z]/', $name)) {
                 ob_start();
                 echo static::__callStatic(lcfirst(substr($name, 3)), $params);
